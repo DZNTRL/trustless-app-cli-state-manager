@@ -1,0 +1,16 @@
+{
+  "name": "pro-web-app-cli-state-manager",
+  "scripts": {
+    "build": "npx tsc --skipLibCheck && node ./changeUpdate"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:joshuaebowling/pro-web-app-cli-state-manager.git",
+  "author": "joshuaebowling <joshuaebowling@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^4.1.1",
+    "pro-web-core": "./pro-web-core",
+    "pro-web-app-cli-api-service": "./pro-web-app-cli-api-service"
+  }
+}
