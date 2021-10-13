@@ -8,7 +8,18 @@ const UserReducer = (state: IUserState = UserState, action: IAction) => {
     const newState = createNewState<IUserState>(state)
     switch(action.type) {
         case UserActionKeys.SET_USERNAME:
-            newState.username = action.payload.section
+            newState.username = action.payload
+            newState.usernameUnique = null
+            return newState
+        case UserActionKeys.CHECK_USERNAME:
+            console.log("this is my payload", action.payload)
+            newState.usernameUnique = action.payload
+            newState.username = null
+            return newState
+        case UserActionKeys.REQUEST_LOGIN:
+            newState.username = null
+            newState.usernameUnique = null
+            newState.challenge = action.payload
             return newState
         default:
             return state

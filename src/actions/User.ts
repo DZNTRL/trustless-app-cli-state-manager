@@ -5,60 +5,77 @@ import { Dispatcher } from "pro-web-common/dist/js/interfaces/state-manager/acti
 import { AppActions } from "./App"
 import { Notifications } from "pro-web-common/dist/js/enums/state-manager/Notifications"
 
-const Response = Core.Response
 export interface IUser {
     checkUsername: (username: string) => (dispatch: Dispatcher) => void
     createUser: (username: string, publicKey: string) => (dispatch: Dispatcher) => void
     requestLogin: (username: string) => (dispatch: Dispatcher) => void
     login: (username: string, challenge: string) => (dispatch: Dispatcher) => void
 }
-
 export const User: (svc: IUserService) => IUser = (svc) => {
-    return {
-        checkUsername: (username) => async (dispatch) => { 
-            const result = await svc.checkUsernameUnique(username)
-            if(result.IsError) {
-                AppActions.setNotification(Notifications.danger, result.Message)(dispatch)
-                return
-            }
-            dispatch({
-                type: UserActionKeys.CHECK_USERNAME,
-                payload: result.Data
-            })
+    const actions =  {
+        checkUsername: (username) => (dispatch) => { 
+            svc.checkUsernameUnique(username)
+                .then(result => {
+                    if(result.IsError || result.Data === null) {
+                        AppActions.setNotification(Notifications.danger, result.Message)(dispatch)
+                        return
+                    }
+                    dispatch({
+                        type: UserActionKeys.CHECK_USERNAME,
+                        payload: result.Data
+                    })
+        
+                })
+                .catch(result => AppActions.setNotification(Notifications.danger, result.Message)(dispatch))
         },
-        createUser: (username, publicKey) => async (dispatch) => {
-            const result = await svc.createUser(username, publicKey);
-            if(result.IsError) {
-                AppActions.setNotification(Notifications.danger, result.Message)(dispatch)
-                return
-            }
-            dispatch({
-                type: UserActionKeys.CREATE_USER,
-                payload: result.Data
-            })
+        createUser: (username, publicKey) => (dispatch) => {
+            svc.createUser(username, publicKey)
+                .then(result => {
+                    if(result.IsError || result.Data === 0) {
+                        AppActions.setNotification(Notifications.danger, result.Message)(dispatch)
+                        return
+                    }
+                    actions.requestLogin(username)(dispatch)
+                    AppActions.setNotification(Notifications.success, "User Created")(dispatch)
+                })
+                .catch(result => AppActions.setNotification(Notifications.danger, result.Message)(dispatch))
         },
-        requestLogin: (username) => async (dispatch) => {
-            const result = await svc.requestLogin(username);
-            if(result.IsError) {
-                AppActions.setNotification(Notifications.danger, result.Message)(dispatch)
-                return
-            }
-            dispatch({
-                type: UserActionKeys.REQUEST_LOGIN,
-                payload: result.Data
+        requestLogin: (username) => (dispatch) => {
+            svc.requestLogin(username)
+            .then(result => {
+                if(result.IsError) {
+                    AppActions.setNotification(Notifications.danger, result.Message)(dispatch)
+                    return
+                }
+                if(result.Data === null) {
+                    AppActions.setNotification(Notifications.warning, result.Message)(dispatch)
+                    return
+                }
+                dispatch({
+                    type: UserActionKeys.REQUEST_LOGIN,
+                    payload: result.Data
+                })
             })
+            .catch(result => AppActions.setNotification(Notifications.danger, result.Message)(dispatch))
+
         },
         login: (username, challenge) => async (dispatch) => {
-            const result = await svc.login(username, challenge);
+            const result = await svc.login(username, challenge)
             if(result.IsError) {
                 AppActions.setNotification(Notifications.danger, result.Message)(dispatch)
                 return
             }
-            dispatch({
-                type: UserActionKeys.REQUEST_LOGIN,
-                payload: username
-            })
+            if(result.Data) {
+                dispatch({
+                    type: UserActionKeys.SET_USERNAME,
+                    payload: username
+                })
+                AppActions.setNotification(Notifications.success, result.Message)(dispatch)
+            } else {
+                AppActions.setNotification(Notifications.warning, result.Message)(dispatch)
+            }
 
         }
     }
+    return actions
 }

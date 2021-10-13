@@ -5,7 +5,13 @@ export const AppActions: IAppActions = {
     setNotification: (type, message) => dispatch =>  {
         dispatch({
             type: AppActionKeys.SET_NOTIFICATION,
-            payload: message
+            payload: {type, message}
+        })
+    },
+    clearNotification: () => dispatch => {
+        dispatch({
+            type: AppActionKeys.SET_NOTIFICATION,
+            payload: null
         })
     }
 }
