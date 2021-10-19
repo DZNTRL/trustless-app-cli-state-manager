@@ -10,7 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "redux": "^4.1.1",
-    "pro-web-core": "./pro-web-core",
-    "pro-web-app-cli-api-service": "./pro-web-app-cli-api-service"
+    "pro-web-core": "1.0.0",
+    "pro-web-app-cli-api-service": "1.0.0",
+    "pro-web-common": "1.0.0"
   }
 }
