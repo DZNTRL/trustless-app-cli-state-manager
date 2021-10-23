@@ -1,5 +1,5 @@
-import { NotificationArgs } from "pro-web-common/dist/js/types/state-manager/NotificationArgs"
-import { IAppState } from "pro-web-common/dist/js/interfaces/states/IApp"
+import { IAppState } from "pro-web-common/dist/js/interfaces/state-manager/states/IApp"
 export const AppState: IAppState = {
-    notification: null
+    notification: null,
+    loading: null
 }

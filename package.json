@@ -9,8 +9,8 @@
   "author": "joshuaebowling <joshuaebowling@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "redux": "^4.1.1",
-    "pro-web-core": "./pro-web-core",
-    "pro-web-app-cli-api-service": "./pro-web-app-cli-api-service"
+    "pro-web-app-cli-api-service": "^1.0.0",
+    "pro-web-common": "^1.0.0",
+    "redux": "^4.1.1"
   }
 }

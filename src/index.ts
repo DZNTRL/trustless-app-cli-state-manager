@@ -1,3 +1,4 @@
+import redux from "redux"
 import { IApp } from "pro-web-common/dist/js/interfaces/state-manager/actions/IApp"
 import { IUser } from "pro-web-common/dist/js/interfaces/state-manager/actions/IUser"
 import { IAppState } from "pro-web-common/dist/js/interfaces/state-manager/states/IApp"
@@ -9,6 +10,7 @@ import { AppState } from "./initialStates/App"
 import { UserState } from "./initialStates/User"
 import AppReducer from "./reducers/App"
 import UserReducer from "./reducers/User"
+import store from "./store"
 
 export interface IActions {
     app: IApp
@@ -29,6 +31,7 @@ export interface IStateManager {
     actions: IActions
     states: IInitialStates
     reducers: IReducers
+    store: any //this should be typed better
 }
 
 export const actions: IActions = {
@@ -47,5 +50,5 @@ export const states: IInitialStates = {
 }
 
 export const StateManager: IStateManager = {
-    actions, reducers, states
+    actions, reducers, states, store
 }
