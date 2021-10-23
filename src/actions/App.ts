@@ -1,7 +1,7 @@
-import { IAppActions } from "pro-web-common/dist/js/interfaces/state-manager/actions/IAppActions"
+import { IApp } from "pro-web-common/dist/js/interfaces/state-manager/actions/IApp"
 import { AppActionKeys } from "pro-web-common/dist/js/enums/state-manager/AppActionKeys"
 
-export const AppActions: IAppActions = {
+export const AppActions: IApp = {
     setNotification: (type, message) => dispatch =>  {
         dispatch({
             type: AppActionKeys.SET_NOTIFICATION,
@@ -12,6 +12,12 @@ export const AppActions: IAppActions = {
         dispatch({
             type: AppActionKeys.SET_NOTIFICATION,
             payload: null
+        })
+    },
+    setLoading: loading => dispatch => {
+        dispatch({
+            type: AppActionKeys.SET_LOADING,
+            payload: loading
         })
     }
 }
