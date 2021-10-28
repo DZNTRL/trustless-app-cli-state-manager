@@ -29,6 +29,11 @@ pro-web-app-cli-api-service@^1.0.0:
     axios "^0.22.0"
     pro-web-common "^1.0.0"
 
+pro-web-common@1.0.1:
+  version "1.0.1"
+  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.1.tgz#34b20a0db4ba4cc066b0cd9f5c1c1daf47fdd4a5"
+  integrity sha512-IUkA7CLhy05tmmDBpjn7iMEcU0JFrmZpv1uWHx2WbDJ+ISJf7wof/nk+trk3XgmC+DCxbIv/cDCSp8LueaN8XQ==
+
 pro-web-common@^1.0.0:
   version "1.0.0"
   resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.0.tgz#90f1e7ca2bf711f4969f94e6029965a407d578eb"

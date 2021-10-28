@@ -9,11 +9,12 @@ const AppReducer = (state: IAppState = AppState, action: IAction) => {
     switch(action.type) {
         case AppActionKeys.SET_NOTIFICATION:
             newState.notification = action.payload
+            return newState
         case AppActionKeys.SET_LOADING:
             newState.loading = action.payload
+            return newState
         default:
-            newState = state
-        return newState
+            return state
     }
 }
 
