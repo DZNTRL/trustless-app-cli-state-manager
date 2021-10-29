@@ -4,7 +4,7 @@ import { UserActionKeys } from "pro-web-common/dist/js/enums/state-manager/UserA
 import { AppActions } from "./App"
 import { Notifications } from "pro-web-common/dist/js/enums/state-manager/Notifications"
 import { LoadingStates } from "pro-web-common/dist/js/enums/state-manager/LoadingStates"
-import { ResponseMessages } from "pro-web-core/dist/js/enums/ResponseMessages"
+import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
 
 export const User: (svc: IUserService) => IUser = (svc) => {
     const onError = (message, dispatch) => {
