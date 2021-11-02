@@ -20,7 +20,6 @@ const UserReducer = (state: IUserState = UserState, action: IAction) => {
             newState.createUsername = null
             return newState
         case UserActionKeys.REQUEST_LOGIN:
-            newState.username = null
             newState.usernameUnique = null
             newState.challenge = action.payload
             return newState
@@ -29,6 +28,11 @@ const UserReducer = (state: IUserState = UserState, action: IAction) => {
             newState.username = null
             newState.challenge = null
             newState.usernameUnique = null
+            return newState
+        case UserActionKeys.SET_CREATE_USER_PUBLICKEY:
+            newState.createUserPublicKey = action.payload
+            newState.username = null
+            newState.challenge = null
             return newState
         default:
             return state
