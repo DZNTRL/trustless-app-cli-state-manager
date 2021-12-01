@@ -1,10 +1,11 @@
 {
   "name": "pro-web-app-cli-state-manager",
   "scripts": {
-    "build": "rm -rf ./dist/js && npx tsc --skipLibCheck && node ./changeUpdate",
-    "publisha": "npm publish --registry http://localhost:4873"
+    "build": "rm -rf ./dist/js && npx tsc --skipLibCheck",
+    "publisha": "npm version patch -f && npm publish --registry http://localhost:4873",
+    "bp": "npm run build && npm run publisha"
   },
-  "version": "1.0.16",
+  "version": "1.0.17",
   "main": "build/index.js",
   "repository": "git@github.com:joshuaebowling/pro-web-app-cli-state-manager.git",
   "author": "josh bowling: Session Messenger<0589f966e710b940904b19fea0ccd3cd1342086f15d69aa7adac8ce6d9abcf7b7a>",
