@@ -1,16 +1,18 @@
 {
   "name": "pro-web-app-cli-state-manager",
   "scripts": {
-    "build": "npx tsc --skipLibCheck && node ./changeUpdate"
+    "build": "rm -rf ./dist/js && npx tsc --skipLibCheck",
+    "publisha": "npm version patch -f && npm publish --registry http://localhost:4873",
+    "bp": "npm run build && npm run publisha"
   },
-  "version": "1.0.0",
+  "version": "1.0.18",
   "main": "build/index.js",
   "repository": "git@github.com:joshuaebowling/pro-web-app-cli-state-manager.git",
-  "author": "joshuaebowling <joshuaebowling@gmail.com>",
+  "author": "josh bowling: Session Messenger<0589f966e710b940904b19fea0ccd3cd1342086f15d69aa7adac8ce6d9abcf7b7a>",
   "license": "MIT",
   "dependencies": {
-    "pro-web-app-cli-api-service": "^1.0.0",
-    "pro-web-common": "^1.0.0",
-    "redux": "^4.1.1"
+    "pro-web-common": "^1.0.6",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.4.0"
   }
 }

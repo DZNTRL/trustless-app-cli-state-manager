@@ -3,5 +3,7 @@ import { IUserState } from "pro-web-common/dist/js/interfaces/state-manager/stat
 export const UserState: IUserState = {
     username: null,
     usernameUnique: null,
-    challenge: null
+    challenge: null,
+    createUsername: null,
+    createUserPublicKey: null
 }
