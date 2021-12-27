@@ -50,15 +50,14 @@ export const User: (svc: IUserService) => IUser = (svc) => {
         },
         requestLogin: (username) => (dispatch) => {
             AppActions.setLoading(LoadingStates.loading)(dispatch)
+            actions.setUsername(username)(dispatch)
             svc.requestLogin(username)
             .then(result => {
-                console.log("requestloginapiresuilt", result)
                 if(result.IsError) {
                     onError(result.Message, dispatch)
                     return
                 }
                 AppActions.setLoading(LoadingStates.ready)(dispatch)
-                console.log(result)
                 if(result.Data === null) {
                     AppActions.setNotification(Notifications.warning, result.Message)(dispatch)
                     return
@@ -100,6 +99,12 @@ export const User: (svc: IUserService) => IUser = (svc) => {
             dispatch({
                 type: UserActionKeys.SET_CREATE_USER_PUBLICKEY,
                 payload: publicKey
+            })
+        },
+        setUsername: username => dispatch => {
+            dispatch({
+                type: UserActionKeys.SET_USERNAME,
+                payload: username
             })
         }
     }
