@@ -5,7 +5,7 @@
     "publisha": "npm version patch -f && npm publish --registry http://localhost:4873",
     "bp": "npm run build && npm run publisha"
   },
-  "version": "1.0.32",
+  "version": "1.0.33",
   "main": "build/index.js",
   "repository": "git@github.com:joshuaebowling/pro-web-app-cli-state-manager.git",
   "author": "josh bowling: Session Messenger<0589f966e710b940904b19fea0ccd3cd1342086f15d69aa7adac8ce6d9abcf7b7a>",
