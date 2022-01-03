@@ -5,5 +5,6 @@ export const UserState: IUserState = {
     usernameUnique: null,
     challenge: null,
     createUsername: null,
-    createUserPublicKey: null
+    createUserPublicKey: null,
+    currentUser: null
 }

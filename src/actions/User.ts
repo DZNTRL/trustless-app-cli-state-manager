@@ -1,4 +1,4 @@
-import { IUser as IUserService } from "pro-web-common/dist/js/interfaces/service/IUser"
+import { IUser as IUserService } from "pro-web-common/dist/js/interfaces/cli-api/User"
 import { IUser } from "pro-web-common/dist/js/interfaces/state-manager/actions/IUser"
 import { UserActionKeys } from "pro-web-common/dist/js/enums/state-manager/UserActionKeys"
 import { AppActions } from "./App"
@@ -38,19 +38,24 @@ export const User: (svc: IUserService) => IUser = (svc) => {
             AppActions.setLoading(LoadingStates.loading)(dispatch)
             svc.createUser(username, publicKey)
                 .then(result => {
+                    console.log("result from actions.user.createuser", result)
                     if(result.IsError || result.Data === 0) {
-                        onError(result.Message, dispatch)
+                        let message = "Could not create user"
+                        if(result.Message === ResponseMessages.InvalidPublicKey.toString()) {
+                            message = `${message} -- bad public key`
+                        }
+                        onError(message, dispatch)
                         return
                     }
                     AppActions.setLoading(LoadingStates.ready)(dispatch)
-                    AppActions.setNotification(Notifications.success, "User Created")(dispatch)
+                    AppActions.setNotification(Notifications.success, "User Created, Proceed to Login")(dispatch)
                     actions.requestLogin(username)(dispatch)
                 })
                 .catch(result =>onError(result.Message, dispatch))
         },
         requestLogin: (username) => (dispatch) => {
+            console.log("requestLogin action usernamer", username)
             AppActions.setLoading(LoadingStates.loading)(dispatch)
-            actions.setUsername(username)(dispatch)
             svc.requestLogin(username)
             .then(result => {
                 if(result.IsError) {
@@ -58,13 +63,18 @@ export const User: (svc: IUserService) => IUser = (svc) => {
                     return
                 }
                 AppActions.setLoading(LoadingStates.ready)(dispatch)
-                if(result.Data === null) {
+                if(result.Data === null) {                    
                     AppActions.setNotification(Notifications.warning, result.Message)(dispatch)
                     return
                 }
+                actions.setUsername(username)(dispatch)
                 dispatch({
                     type: UserActionKeys.REQUEST_LOGIN,
                     payload: result.Data
+                })
+                dispatch({
+                    type: UserActionKeys.SET_USERNAME,
+                    payload: username
                 })
             })
             .catch(result => onError(result.Message, dispatch))
@@ -78,10 +88,31 @@ export const User: (svc: IUserService) => IUser = (svc) => {
                 return
             }
             AppActions.setLoading(LoadingStates.ready)(dispatch)
+            console.log("login result from actions", result)
+            if(result.Data) {               
+                dispatch({
+                    type: UserActionKeys.SET_USER,
+                    payload: result.Data
+                })
+                
+                AppActions.setNotification(Notifications.success, result.Message)(dispatch)
+            } else {
+                AppActions.setNotification(Notifications.warning, result.Message)(dispatch)
+            }
+
+        },
+        logout: () => async (dispatch) => {
+            AppActions.setLoading(LoadingStates.loading)(dispatch)
+            const result = await svc.logout()
+            if(result.IsError) {
+                onError(result.Message, dispatch)
+                return
+            }
+            AppActions.setLoading(LoadingStates.ready)(dispatch)
             if(result.Data) {
                 dispatch({
                     type: UserActionKeys.SET_USERNAME,
-                    payload: username
+                    payload: null
                 })
                 AppActions.setNotification(Notifications.success, result.Message)(dispatch)
             } else {
@@ -105,6 +136,20 @@ export const User: (svc: IUserService) => IUser = (svc) => {
             dispatch({
                 type: UserActionKeys.SET_USERNAME,
                 payload: username
+            })
+        },
+        setCurrentUser: () => async dispatch => {
+            AppActions.setLoading(LoadingStates.loading)(dispatch)
+            const userResp = await svc.getCurrentUser()
+            console.log("setCurrentUserResp", userResp)
+            if(userResp.IsError) {
+                AppActions.setLoading(LoadingStates.error)(dispatch)
+                return
+            }
+            AppActions.setLoading(LoadingStates.ready)(dispatch)
+            dispatch({
+                type: UserActionKeys.SET_USER,
+                payload: userResp.Data
             })
         }
     }

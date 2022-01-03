@@ -13,9 +13,13 @@ const UserReducer = (state: IUserState = UserState, action: IAction) => {
             newState.createUsername = null
             newState.createUserPublicKey = null
             return newState
+        case UserActionKeys.SET_USER:
+            newState.currentUser = action.payload
+            return newState            
         case UserActionKeys.CHECK_USERNAME:
             newState.usernameUnique = action.payload
             newState.username = null
+            newState.currentUser = null
             newState.challenge = null
             newState.createUsername = null
             return newState
@@ -26,12 +30,14 @@ const UserReducer = (state: IUserState = UserState, action: IAction) => {
         case UserActionKeys.SET_CREATE_USERNAME:
             newState.createUsername = action.payload
             newState.username = null
+            newState.currentUser = null
             newState.challenge = null
             newState.usernameUnique = null
             return newState
         case UserActionKeys.SET_CREATE_USER_PUBLICKEY:
             newState.createUserPublicKey = action.payload
             newState.username = null
+            newState.currentUser = null
             newState.challenge = null
             return newState
         default:

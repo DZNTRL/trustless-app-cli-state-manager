@@ -14,10 +14,22 @@
   resolved "http://localhost:4873/@types%2flodash/-/lodash-4.14.176.tgz#641150fc1cda36fbfa329de603bbb175d7ee20c0"
   integrity sha512-xZmuPTa3rlZoIbtDUyJKZQimJV3bxCmzMIO2c9Pz9afyDro6kr7R79GwcB6mRhuoPmV2p1Vb66WOJH7F886WKQ==
 
+axios@^0.22.0:
+  version "0.22.0"
+  resolved "http://localhost:4873/axios/-/axios-0.22.0.tgz#bf702c41fb50fbca4539589d839a077117b79b25"
+  integrity sha512-Z0U3uhqQeg1oNcihswf4ZD57O3NrR1+ZXhxaROaWpDmsDTx7T2HNBV2ulBtie2hwJptu8UvgnJoK+BIqdzh/1w==
+  dependencies:
+    follow-redirects "^1.14.4"
+
 denque@^2.0.1:
   version "2.0.1"
   resolved "http://localhost:4873/denque/-/denque-2.0.1.tgz#bcef4c1b80dc32efe97515744f21a4229ab8934a"
   integrity sha512-tfiWc6BQLXNLpNiR5iGd0Ocu3P3VpxfzFiqubLgMfhfOw9WyvgJBd46CClNn9k3qfbjvT//0cf7AlYRX/OslMQ==
+
+follow-redirects@^1.14.4:
+  version "1.14.6"
+  resolved "http://localhost:4873/follow-redirects/-/follow-redirects-1.14.6.tgz#8cfb281bbc035b3c067d6cd975b0f6ade6e855cd"
+  integrity sha512-fhUl5EwSJbbl8AR+uYL2KQDxLkdSjZGR36xy46AO7cOMTrCMON6Sa28FmAnC2tRTDbd/Uuzz3aJBv7EBN7JH8A==
 
 generate-function@^2.3.1:
   version "2.3.1"
@@ -94,10 +106,26 @@ nanoclone@^0.2.1:
   resolved "http://localhost:4873/nanoclone/-/nanoclone-0.2.1.tgz#dd4090f8f1a110d26bb32c49ed2f5b9235209ed4"
   integrity sha512-wynEP02LmIbLpcYw8uBKpcfF6dmg2vcpKqxeH5UcoKEYdExslsdUA4ugFauuaeYdTB76ez6gJW8XAZ6CgkXYxA==
 
-pro-web-common@^1.0.18:
-  version "1.0.18"
-  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.18.tgz#22eaa121504a111f311f7242d3ea7050e85eef1b"
-  integrity sha512-Fpekei10Hhz7b4IW5xhV1jXPxNKqoIJAdNuBn18Lz0ecg1zYXJ8nlnwbNH2J9OZajwCqJbcIqy/iCJVl9Mts0Q==
+pro-web-app-cli-api-service@^1.0.20:
+  version "1.0.20"
+  resolved "http://localhost:4873/pro-web-app-cli-api-service/-/pro-web-app-cli-api-service-1.0.20.tgz#75b7f4b08cab36b62011fec6c301f4fdfe10d4d9"
+  integrity sha512-s4n90wB86lXCZ1xDaHb/zwHyrpZBWWrAzatFiwYUHcF9N1MYGn3MMmsG6jTDm0sauefTfNtHvdwuJRRZ+ObZxQ==
+  dependencies:
+    axios "^0.22.0"
+    pro-web-common "^1.0.33"
+
+pro-web-common@^1.0.33:
+  version "1.0.33"
+  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.33.tgz#ec4e8cdcb00d5f2ca845505a0e4ddf12227be574"
+  integrity sha512-OPpV08COiGgEa1zcaot/h3eDPpabSE7rzidsQkxUg5bX4f2rKSAiTt1qwrZE3FxP+uyqdRgfWVx9vD0o/C/pPg==
+  dependencies:
+    mysql2 "^2.3.2"
+    yup "^0.32.11"
+
+pro-web-common@^1.0.34:
+  version "1.0.34"
+  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.34.tgz#91a2f9d4a5c9d864334b3896bdfc711af288a086"
+  integrity sha512-lzY1sta5jBg4cy+w1xvxHIlA+MR25C71iILR7vh9nwR4et+d0yCIlW8FdwHrrOVAWevKh85CC7v3rlOjDiUBaQ==
   dependencies:
     mysql2 "^2.3.2"
     yup "^0.32.11"
